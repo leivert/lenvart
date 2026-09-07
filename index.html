@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Xicryt Assessment Portal</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;8..60,600;8..60,700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div id="static-overlay" aria-hidden="true"></div>
+
+<main id="app">
+
+  <!-- LANDING -->
+  <section class="screen" id="screen-landing" data-active="true">
+    <div class="panel">
+      <p class="kicker">Xicryt Assessment Portal</p>
+      <h1 class="brand">XICRYT</h1>
+      <p class="lede">A short assessment stands between you and certification. Eleven questions. No calculators, no notes, no way to pause once you begin.</p>
+      <button class="btn btn-primary" id="btn-start">Apply for Certification</button>
+      <p class="footnote">Average completion time: 4 minutes. Passing score: 90%.</p>
+    </div>
+  </section>
+
+  <!-- REGISTER -->
+  <section class="screen" id="screen-register">
+    <div class="panel">
+      <p class="kicker">Step 1 of 2</p>
+      <h2 class="panel-title">Candidate details</h2>
+      <p class="lede small">This information will be printed on your certificate if you pass. Enter it correctly &mdash; there will not be a second chance to fix it.</p>
+
+      <label class="field">
+        <span>Full name</span>
+        <input type="text" id="input-name" maxlength="40" autocomplete="off" placeholder="As it should appear on your certificate">
+      </label>
+
+      <label class="field">
+        <span>Age</span>
+        <input type="number" id="input-age" min="1" max="120" autocomplete="off" placeholder="Years">
+      </label>
+
+      <p class="field-error" id="register-error"></p>
+
+      <button class="btn btn-primary" id="btn-begin">Begin Assessment</button>
+    </div>
+  </section>
+
+  <!-- QUIZ -->
+  <section class="screen" id="screen-quiz">
+    <div class="panel" id="quiz-panel">
+      <div class="quiz-head">
+        <span id="quiz-progress-label">Question 1 of 11</span>
+        <div class="progress-track"><div class="progress-fill" id="progress-fill"></div></div>
+      </div>
+
+      <h2 class="question-text" id="question-text">&nbsp;</h2>
+
+      <div class="options" id="options-list"></div>
+
+      <button class="btn btn-primary" id="btn-next" disabled>Next</button>
+    </div>
+  </section>
+
+  <!-- PASS / CERTIFICATE -->
+  <section class="screen" id="screen-pass">
+    <div class="panel">
+      <p class="kicker">Assessment complete</p>
+      <h2 class="panel-title">Certification issued</h2>
+      <p class="lede small" id="pass-summary"></p>
+
+      <div class="cert-wrap">
+        <canvas id="cert-canvas" width="1600" height="1131"></canvas>
+      </div>
+
+      <div class="btn-row">
+        <button class="btn btn-secondary" id="btn-download-png">Download PNG</button>
+        <button class="btn btn-secondary" id="btn-download-pdf">Download PDF</button>
+      </div>
+      <button class="btn btn-ghost" id="btn-restart-pass">Start over</button>
+    </div>
+  </section>
+
+  <!-- FAIL -->
+  <section class="screen" id="screen-fail">
+    <div class="panel">
+      <p class="kicker">Assessment complete</p>
+      <h2 class="panel-title">Certification not issued</h2>
+      <p class="lede small" id="fail-summary"></p>
+      <p class="lede small" id="fail-flavor"></p>
+      <button class="btn btn-primary" id="btn-restart-fail">Try again</button>
+    </div>
+  </section>
+
+</main>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<script src="script.js"></script>
+</body>
+</html>
